@@ -10,6 +10,7 @@ const AddNewTask: React.FC = () => {
     const { addTask } = useContext(TasksContext) as TaskContextType
 
     let [ newTask, setNewTask ] = useState({
+        _id: null,
         title: "",
         completed: false
     });

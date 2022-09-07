@@ -1,5 +1,6 @@
 import { IonButton, IonCheckbox, IonContent, IonHeader, IonItem, IonItemDivider, IonLabel, IonList, IonListHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { TasksContext } from '../data/TasksContext';
 import { TaskContextType } from '../types/taskType';
 
@@ -29,7 +30,8 @@ const TaskList: React.FC = () => {
                         {t.completed == false && 
                           <>
                           <IonItem>
-                            <IonLabel>{t.title}</IonLabel>
+                            <IonLabel>{t.title}<Link to={`/edittask/${t._id}`}>Edit</Link></IonLabel>
+                            
                             <IonCheckbox slot="end" checked={t.completed} ></IonCheckbox>
                           </IonItem>
                           </>}

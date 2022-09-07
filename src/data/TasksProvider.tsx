@@ -26,11 +26,20 @@ export const TasksProvider = (props:any) => {
         });
     }
 
+    function editTask(task:ITask) {
+        return axios.put(baseUrl + task._id, task)
+            .then(response => {
+                getTasks()
+                return new Promise(resolve => resolve(response.data));
+            })
+    }
+
     return ( 
         <TasksContext.Provider value={{
             tasks,
             getTasks,
-            addTask
+            addTask,
+            editTask
         }}>
             { props.children }
         </TasksContext.Provider>
