@@ -1,6 +1,6 @@
 import { IonCheckbox, IonContent, IonHeader, IonItem, IonLabel, IonList, IonListHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import { useContext } from 'react';
-import {TasksContext} from '../data/TasksContext';
+import { TasksContext } from '../data/TasksContext';
 import { TaskContextType } from '../types/taskType';
 
 const TaskList: React.FC = () => {
@@ -30,7 +30,7 @@ const TaskList: React.FC = () => {
                           <>
                           <IonItem>
                             <IonLabel>{t.title}</IonLabel>
-                            <IonCheckbox slot="end" ></IonCheckbox>
+                            <IonCheckbox slot="end" checked={t.completed} ></IonCheckbox>
                           </IonItem>
                           </>}
                       </div>
@@ -49,7 +49,7 @@ const TaskList: React.FC = () => {
                           <>
                           <IonItem>
                             <IonLabel>{t.title}</IonLabel>
-                            <IonCheckbox slot="end" checked={true}></IonCheckbox>
+                            <IonCheckbox slot="end" checked={t.completed}></IonCheckbox>
                           </IonItem>
                           </>}
                       </div>
