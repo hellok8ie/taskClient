@@ -34,12 +34,20 @@ export const TasksProvider = (props:any) => {
             })
     }
 
+    function deleteTask(id:ITask) {
+        return axios.delete(baseUrl + id).then(response => {
+            getTasks();
+            return new Promise(resolve => resolve(response.data));
+        });
+    }
+
     return ( 
         <TasksContext.Provider value={{
             tasks,
             getTasks,
             addTask,
-            editTask
+            editTask,
+            deleteTask
         }}>
             { props.children }
         </TasksContext.Provider>

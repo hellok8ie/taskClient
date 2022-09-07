@@ -9,4 +9,5 @@ export type TaskContextType = {
     getTasks: (tasks: ITask) => void;
     addTask: (task: ITask) => void;
     editTask: (task: ITask) => void;
+    deleteTask: (id: ITask) => void;
 }

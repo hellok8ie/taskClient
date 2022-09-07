@@ -6,7 +6,11 @@ import { TaskContextType } from '../types/taskType';
 
 const TaskList: React.FC = () => {
 
-  const { tasks } = useContext(TasksContext) as TaskContextType;
+  const { tasks, deleteTask } = useContext(TasksContext) as TaskContextType;
+
+  function handleDelete(id:any) {
+      deleteTask(id)
+  }
 
   return (
     <IonPage>
@@ -30,8 +34,11 @@ const TaskList: React.FC = () => {
                         {t.completed == false && 
                           <>
                           <IonItem>
-                            <IonLabel>{t.title}<Link to={`/edittask/${t._id}`}>Edit</Link></IonLabel>
-                            
+                            <IonLabel>
+                              {t.title}<br></br>
+                              <Link to={`/edittask/${t._id}`}>Edit</Link>
+                            </IonLabel>
+                            <button onClick={handleDelete.bind(this, t._id)}>Delete Task</button>
                             <IonCheckbox slot="end" checked={t.completed} ></IonCheckbox>
                           </IonItem>
                           </>}
