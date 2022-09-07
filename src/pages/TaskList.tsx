@@ -58,9 +58,9 @@ const TaskList: React.FC = () => {
                   }
           
         </IonList>
-        
+
         <IonItemDivider/>
-        <IonButton expand='full' color="secondary">Add Task</IonButton>
+        <IonButton expand='full' color="secondary" href='/newtask'>Add Task</IonButton>
                   
       </IonContent>
     </IonPage>

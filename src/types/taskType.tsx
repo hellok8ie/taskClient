@@ -1,11 +1,10 @@
 export interface ITask {
-    _id: string;
     title: string;
-    completed: boolean;
-    _v: boolean
+    completed?: boolean;
 }
 
 export type TaskContextType = {
     tasks: ITask[];
     getTasks: (tasks: ITask) => void;
+    addTask: (task: ITask) => void;
 }

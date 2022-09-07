@@ -19,10 +19,18 @@ export const TasksProvider = (props:any) => {
         return axios.get(baseUrl).then(response => setTasks(response.data));
     }
 
+    function addTask(task:ITask) {
+        return axios.post(baseUrl, task).then(response => {
+            getTasks();
+            return new Promise(resolve => resolve(response.data));
+        });
+    }
+
     return ( 
         <TasksContext.Provider value={{
             tasks,
-            getTasks
+            getTasks,
+            addTask
         }}>
             { props.children }
         </TasksContext.Provider>
