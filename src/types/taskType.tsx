@@ -7,5 +7,5 @@ export interface ITask {
 
 export type TaskContextType = {
     tasks: ITask[];
-    getTask: (tasks: ITask) => void;
+    getTasks: (tasks: ITask) => void;
 }

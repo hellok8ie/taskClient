@@ -1,7 +1,11 @@
 import { IonContent, IonHeader, IonItem, IonLabel, IonList, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import TasksContext from '../data/TasksContext';
+import { useContext } from 'react';
+import {TasksContext} from '../data/TasksContext';
+import { TaskContextType } from '../types/taskType';
 
 const TaskList: React.FC = () => {
+
+  const { tasks } = useContext(TasksContext) as TaskContextType;
 
   return (
     <IonPage>
@@ -15,37 +19,20 @@ const TaskList: React.FC = () => {
       <IonContent fullscreen>
         <IonList>
 
-        <TasksContext.Consumer>
-
-        {
-          ( {tasks} ) => {
-            return (
-              <>
-              {console.log(tasks)}
-              </>
-            )
-          }
-        }
-
-
-          {/* {
-            tasks.map((t:Object) => {
-              return ( 
-              
+          {
+            tasks.map((t) => {
+              return (
               <div>
                 <IonItem>
-                  <IonLabel>Title</IonLabel>
+                  <IonLabel>{t.title}</IonLabel>
                 </IonItem>
               </div>
               )
             })
-          } */}
-
-        </TasksContext.Consumer>
+          }
           
         </IonList>
       
-
       </IonContent>
     </IonPage>
   );
