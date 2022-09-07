@@ -1,6 +1,4 @@
 import React from "react";
-import { TaskContextType, ITask } from "../types/taskType";
+import { TaskContextType } from "../types/taskType";
 
-const TasksContext = React.createContext({});
-
-export default TasksContext
+export const TasksContext = React.createContext<TaskContextType | null>(null);

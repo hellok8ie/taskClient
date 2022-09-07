@@ -1,10 +1,11 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
-import TasksContext from "./TasksContext";
+import React, { useEffect, useState } from "react";
+import { ITask } from "../types/taskType";
+import {TasksContext} from "./TasksContext";
 
 export const TasksProvider = (props:any) => {
 
-    const [ tasks, setTasks ] = useState([]);
+    const [ tasks, setTasks ] = useState<ITask[]>([]);
     const baseUrl = "http://localhost:3000/api/tasks/";
 
     useEffect(() => {
@@ -18,10 +19,35 @@ export const TasksProvider = (props:any) => {
         return axios.get(baseUrl).then(response => setTasks(response.data));
     }
 
+    function addTask(task:ITask) {
+        return axios.post(baseUrl, task).then(response => {
+            getTasks();
+            return new Promise(resolve => resolve(response.data));
+        });
+    }
+
+    function editTask(task:ITask) {
+        return axios.put(baseUrl + task._id, task)
+            .then(response => {
+                getTasks()
+                return new Promise(resolve => resolve(response.data));
+            })
+    }
+
+    function deleteTask(id:ITask) {
+        return axios.delete(baseUrl + id).then(response => {
+            getTasks();
+            return new Promise(resolve => resolve(response.data));
+        });
+    }
+
     return ( 
         <TasksContext.Provider value={{
             tasks,
-            getTasks
+            getTasks,
+            addTask,
+            editTask,
+            deleteTask
         }}>
             { props.children }
         </TasksContext.Provider>
