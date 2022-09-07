@@ -3,11 +3,13 @@ import { IonPage } from "@ionic/react"
 import { useState } from "react";
 import { TasksContext } from "../data/TasksContext";
 import { TaskContextType } from '../types/taskType';
+import { useHistory } from "react-router";
 
 
 const AddNewTask: React.FC = () => {
 
-    const { addTask } = useContext(TasksContext) as TaskContextType
+    const { addTask } = useContext(TasksContext) as TaskContextType;
+    const navigate = useHistory();
 
     let [ newTask, setNewTask ] = useState({
         _id: null,
@@ -24,7 +26,7 @@ const AddNewTask: React.FC = () => {
     function handleSubmit(event:any) {
         event.preventDefault();
         addTask(newTask)
-        console.log(newTask)
+        navigate.push('/')
     };
 
     return (

@@ -1,6 +1,6 @@
-import { IonHeader, IonPage } from "@ionic/react"
+import { IonPage } from "@ionic/react"
 import { useContext, useState } from "react";
-import { useParams } from "react-router";
+import { useHistory, useParams } from "react-router";
 import { TasksContext } from "../data/TasksContext";
 import { TaskContextType } from "../types/taskType";
 
@@ -9,6 +9,7 @@ const EditTask: React.FC = () => {
 
     const { editTask } = useContext(TasksContext) as TaskContextType;
     let { id } = useParams() as any;
+    const navigate = useHistory();
 
     let [ editedTask, setEditedTask ] = useState({
         _id: id,
@@ -25,6 +26,7 @@ const EditTask: React.FC = () => {
     function handleSubmit(event:any) {
         event.preventDefault();
         editTask(editedTask)
+        navigate.push('/')
     };
 
     return (
