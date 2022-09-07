@@ -1,4 +1,4 @@
-import { IonCheckbox, IonContent, IonHeader, IonItem, IonLabel, IonList, IonListHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButton, IonCheckbox, IonContent, IonHeader, IonItem, IonItemDivider, IonLabel, IonList, IonListHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import { useContext } from 'react';
 import { TasksContext } from '../data/TasksContext';
 import { TaskContextType } from '../types/taskType';
@@ -37,7 +37,7 @@ const TaskList: React.FC = () => {
                       )
                     })
                   }
-
+          <IonItemDivider/>
           <IonListHeader>
             <IonLabel>Completed</IonLabel>
           </IonListHeader>
@@ -58,7 +58,10 @@ const TaskList: React.FC = () => {
                   }
           
         </IonList>
-      
+        
+        <IonItemDivider/>
+        <IonButton expand='full' color="secondary">Add Task</IonButton>
+                  
       </IonContent>
     </IonPage>
   );
