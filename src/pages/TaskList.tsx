@@ -36,13 +36,6 @@ const TaskList: React.FC = () => {
     setNewTask({_id: null, title: "", completed: false})
   };
 
-
-  // function onWillDismiss(ev: CustomEvent<OverlayEventDetail>) {
-  //   if (ev.detail.role === 'confirm') {
-  //     return newTask.title == ""
-  //   }
-  // }
-
   return (
 
     // CODE FOR TASKLIST PAGE
