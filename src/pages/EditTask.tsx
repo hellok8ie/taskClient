@@ -15,7 +15,7 @@ const EditTask: React.FC = () => {
         _id: id,
         title: "",
         completed: false
-    })
+    });
 
     function handleChange(event:any) {
         setEditedTask((prevValue) => {
@@ -32,12 +32,11 @@ const EditTask: React.FC = () => {
     return (
         <IonPage>
             <form onSubmit={handleSubmit}>
-            <h1>Edit Task</h1>
-            <input type="text" name="title" value={editedTask.title} onChange={handleChange} />
-            <br></br>
-            <button>Edit Task</button>
-        </form>
-
+                <h1>Edit Task</h1>
+                <input type="text" name="title" value={editedTask.title} onChange={handleChange} />
+                <br></br>
+                <button>Edit Task</button>
+            </form>
         </IonPage>
     )
 }

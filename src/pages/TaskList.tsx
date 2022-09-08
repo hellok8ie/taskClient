@@ -3,15 +3,22 @@ import { useContext, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { TasksContext } from '../data/TasksContext';
 import { TaskContextType } from '../types/taskType';
-import { trash } from 'ionicons/icons';
+import { trash, pencil } from 'ionicons/icons';
+import { useHistory } from 'react-router-dom';
 
 const TaskList: React.FC = () => {
 
   //FUNCTIONS/VARIABLES FOR TASKLIST
   const { tasks, addTask, deleteTask } = useContext(TasksContext) as TaskContextType;
+  const history = useHistory();
+
 
   function handleDelete(id:any) {
       deleteTask(id)
+  }
+
+  function handleEditNav(id:any) {
+    history.replace(`/edittask/:${id}`)
   }
 
   // FUNCTIONS/VARIABLES FOR MODAL DIALOG
@@ -68,10 +75,13 @@ const TaskList: React.FC = () => {
                                 {t.title}<br></br>
                                 <Link to={`/edittask/${t._id}`}>Edit</Link>
                               </IonLabel>
-                              <IonCheckbox slot="end" checked={t.completed} ></IonCheckbox>
+                              <IonCheckbox slot="end" checked={t.completed}></IonCheckbox>
                             </IonItem>
-
+                            
                             <IonItemOptions side="end">
+                              <IonItemOption color="warning">
+                                <IonIcon slot="icon-only" icon={pencil} onClick={handleEditNav.bind(this, t._id)} />
+                              </IonItemOption>
                               <IonItemOption color="danger">
                                 <IonIcon slot="icon-only" icon={trash} onClick={handleDelete.bind(this, t._id)} />
                               </IonItemOption>
