@@ -18,7 +18,7 @@ const TaskList: React.FC = () => {
   }
 
   function handleEditNav(id:any) {
-    history.replace(`/edittask/:${id}`)
+    history.push(`/edittask/${id}`)
   }
 
   // FUNCTIONS/VARIABLES FOR MODAL DIALOG
@@ -73,7 +73,7 @@ const TaskList: React.FC = () => {
                             <IonItem>
                               <IonLabel>
                                 {t.title}<br></br>
-                                <Link to={`/edittask/${t._id}`}>Edit</Link>
+                                {/* <Link to={`/edittask/${t._id}`}>Edit</Link> */}
                               </IonLabel>
                               <IonCheckbox slot="end" checked={t.completed}></IonCheckbox>
                             </IonItem>
