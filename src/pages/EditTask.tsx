@@ -33,6 +33,7 @@ const EditTask: React.FC = () => {
     return (
         <IonPage>
             <IonContent>
+            <form onSubmit={handleSubmit}>
             <IonHeader>
                 <IonToolbar color='tertiary'>
                     <IonButtons slot="start">
@@ -41,16 +42,14 @@ const EditTask: React.FC = () => {
                 <IonTitle>Edit Task</IonTitle>
                 </IonToolbar>
             </IonHeader>
-            <form onSubmit={handleSubmit}>
                 <br/>
                 <br/>
-                
-                <label>Update task below:</label>
+                <label>Type task below:</label>
                 <br/>
                 <input type="text" name="title" value={editedTask.title} onChange={handleChange} />
                 <br/>
                 <br/>
-                <IonButton expand="block" color='tertiary'>Edit Task</IonButton>
+                <button color='tertiary'>Edit Task</button>
             </form>
             </IonContent>
         </IonPage>
