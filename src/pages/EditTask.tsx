@@ -1,8 +1,9 @@
-import { IonPage } from "@ionic/react"
+import { IonBackButton, IonButton, IonButtons, IonContent, IonHeader, IonItemDivider, IonLabel, IonPage, IonTitle, IonToolbar } from "@ionic/react"
 import { useContext, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import { TasksContext } from "../data/TasksContext";
 import { TaskContextType } from "../types/taskType";
+import { arrowBack } from 'ionicons/icons';
 
 
 const EditTask: React.FC = () => {
@@ -31,12 +32,27 @@ const EditTask: React.FC = () => {
 
     return (
         <IonPage>
+            <IonContent>
+            <IonHeader>
+                <IonToolbar color='tertiary'>
+                    <IonButtons slot="start">
+                        <IonBackButton text="" icon={arrowBack} defaultHref="/"/>
+                    </IonButtons>
+                <IonTitle>Edit Task</IonTitle>
+                </IonToolbar>
+            </IonHeader>
             <form onSubmit={handleSubmit}>
-                <h1>Edit Task</h1>
+                <br/>
+                <br/>
+                
+                <label>Update task below:</label>
+                <br/>
                 <input type="text" name="title" value={editedTask.title} onChange={handleChange} />
-                <br></br>
-                <button>Edit Task</button>
+                <br/>
+                <br/>
+                <IonButton expand="block" color='tertiary'>Edit Task</IonButton>
             </form>
+            </IonContent>
         </IonPage>
     )
 }

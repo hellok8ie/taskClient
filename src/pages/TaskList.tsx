@@ -8,7 +8,8 @@ import { useHistory } from 'react-router-dom';
 
 const TaskList: React.FC = () => {
 
-  //FUNCTIONS/VARIABLES FOR TASKLIST
+  //FUNCTIONS/VARIABLES FOR TASKLIST~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
   const { tasks, addTask, editTask, deleteTask } = useContext(TasksContext) as TaskContextType;
   const history = useHistory();
 
@@ -29,7 +30,7 @@ const TaskList: React.FC = () => {
     editTask(task)
   }
 
-  // FUNCTIONS/VARIABLES FOR MODAL DIALOG
+  // FUNCTIONS/VARIABLES FOR MODAL DIALOG~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   const modal = useRef<HTMLIonModalElement>(null);
   const input = useRef<HTMLIonInputElement>(null);
@@ -54,11 +55,11 @@ const TaskList: React.FC = () => {
 
   return (
 
-    // CODE FOR TASKLIST PAGE
+    // CODE FOR TASKLIST PAGE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     <IonPage>
       <IonHeader>
-        <IonToolbar>
+        <IonToolbar color="tertiary">
           <IonTitle>Task List</IonTitle>
         </IonToolbar>
       </IonHeader>
@@ -67,7 +68,7 @@ const TaskList: React.FC = () => {
       <IonContent fullscreen>
         <IonList>
           <IonListHeader>
-            <IonLabel>Incomplete</IonLabel>
+            <IonLabel color='warning'>Incomplete</IonLabel>
           </IonListHeader>
 
                 {
@@ -101,21 +102,21 @@ const TaskList: React.FC = () => {
                       )
                     })
                   }
-          <IonItemDivider/>
+
           <IonListHeader>
-            <IonLabel>Completed</IonLabel>
+            <IonLabel color='success'>Completed</IonLabel>
           </IonListHeader>
                   {
                     tasks.map((t) => {
                       return (
-                      <div>
+                      <div key={t._id}>
                         {t.completed && 
                           <>
                           <IonItemSliding>
 
                           <IonItem>
                             <IonLabel>{t.title}</IonLabel>
-                            <IonCheckbox slot="end" checked={t.completed} onClick={handleCheckboxChange.bind(this, t)}></IonCheckbox>
+                            <IonCheckbox color='tertiary' slot="end" checked={t.completed} onClick={handleCheckboxChange.bind(this, t)}></IonCheckbox>
                           </IonItem>
 
                           <IonItemOptions side="end">
@@ -133,16 +134,16 @@ const TaskList: React.FC = () => {
           
         </IonList>
 
-        <IonItemDivider/>
-        <IonButton expand='full' color="secondary" id='open-modal'>Add Task</IonButton>
+        <IonButton expand='block' color="tertiary" id='open-modal'>Add Task</IonButton>
 
-      {/* CODE FOR MODAL DIALOG COMPONENT*/}
+      {/* CODE FOR MODAL DIALOG COMPONENT~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/}
 
-      <IonContent className="ion-padding">
+      
 
-      <IonModal ref={modal} trigger="open-modal">
+      <IonModal ref={modal} trigger="open-modal" className='ion-padding'>
+
           <IonHeader>
-            <IonToolbar>
+            <IonToolbar color='tertiary'>
               <IonButtons slot="start">
                 <IonButton onClick={() => modal.current?.dismiss()}>Cancel</IonButton>
               </IonButtons>
@@ -156,12 +157,12 @@ const TaskList: React.FC = () => {
           </IonHeader>
           <IonContent className="ion-padding">
             <IonItem>
-            <input placeholder="Enter task" type="text" name="title" value={newTask.title} onChange={handleChange} />
+              <input placeholder="Enter task" type="text" name="title" value={newTask.title} onChange={handleChange} />
             </IonItem>
           </IonContent>
+
         </IonModal>
-      </IonContent>
-        
+
       </IonContent>
     </IonPage>
   );
