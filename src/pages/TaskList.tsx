@@ -1,18 +1,52 @@
-import { IonButton, IonCheckbox, IonContent, IonHeader, IonItem, IonItemDivider, IonLabel, IonList, IonListHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import { useContext } from 'react';
+import { IonButton, IonButtons, IonCheckbox, IonContent, IonHeader, IonItem, IonItemDivider, IonLabel, IonList, IonListHeader, IonModal, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { useContext, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { TasksContext } from '../data/TasksContext';
 import { TaskContextType } from '../types/taskType';
 
 const TaskList: React.FC = () => {
 
-  const { tasks, deleteTask } = useContext(TasksContext) as TaskContextType;
+  //FUNCTIONS/VARIABLES FOR TASKLIST
+  const { tasks, addTask, deleteTask } = useContext(TasksContext) as TaskContextType;
 
   function handleDelete(id:any) {
       deleteTask(id)
   }
 
+  // FUNCTIONS/VARIABLES FOR MODAL DIALOG
+
+  const modal = useRef<HTMLIonModalElement>(null);
+  const input = useRef<HTMLIonInputElement>(null);
+
+  let [ newTask, setNewTask ] = useState({
+    _id: null,
+    title: "",
+    completed: false
+  });
+
+  function handleChange(event:any) {
+    setNewTask((prevValue) => {
+        return { ...prevValue, [event.target.name]: event.target.value }
+    });
+  }
+
+  function handleSubmit() {
+    modal.current?.dismiss(input.current?.value, 'confirm');
+    addTask(newTask)
+    setNewTask({_id: null, title: "", completed: false})
+  };
+
+
+  // function onWillDismiss(ev: CustomEvent<OverlayEventDetail>) {
+  //   if (ev.detail.role === 'confirm') {
+  //     return newTask.title == ""
+  //   }
+  // }
+
   return (
+
+    // CODE FOR TASKLIST PAGE
+
     <IonPage>
       <IonHeader>
         <IonToolbar>
@@ -69,8 +103,34 @@ const TaskList: React.FC = () => {
         </IonList>
 
         <IonItemDivider/>
-        <IonButton expand='full' color="secondary" href='/newtask'>Add Task</IonButton>
-                  
+        <IonButton expand='full' color="secondary" id='open-modal'>Add Task</IonButton>
+
+      {/* CODE FOR MODAL DIALOG COMPONENT*/}
+
+      <IonContent className="ion-padding">
+
+      <IonModal ref={modal} trigger="open-modal">
+          <IonHeader>
+            <IonToolbar>
+              <IonButtons slot="start">
+                <IonButton onClick={() => modal.current?.dismiss()}>Cancel</IonButton>
+              </IonButtons>
+              <IonTitle>New Task</IonTitle>
+              <IonButtons slot="end">
+                <IonButton strong={true} onClick={handleSubmit}>
+                  Create
+                </IonButton>
+              </IonButtons>
+            </IonToolbar>
+          </IonHeader>
+          <IonContent className="ion-padding">
+            <IonItem>
+            <input placeholder="Enter task" type="text" name="title" value={newTask.title} onChange={handleChange} />
+            </IonItem>
+          </IonContent>
+        </IonModal>
+      </IonContent>
+        
       </IonContent>
     </IonPage>
   );
