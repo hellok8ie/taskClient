@@ -25,7 +25,6 @@ import { TasksProvider } from './data/TasksProvider';
 
 /*Pages*/
 import TaskList from './pages/TaskList';
-import AddNewTask from './pages/AddNewTask';
 import EditTask from './pages/EditTask';
 
 setupIonicReact();
@@ -39,7 +38,6 @@ const App: React.FC = () => (
       <IonRouterOutlet>
 
         <Route exact path="/tasks" component={TaskList}></Route>
-        <Route exact path="/newtask" component={AddNewTask}/>
         <Route exact path="/edittask/:id" component={EditTask}/>
 
         <Route exact path="/">

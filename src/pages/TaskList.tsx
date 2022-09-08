@@ -1,8 +1,9 @@
-import { IonButton, IonButtons, IonCheckbox, IonContent, IonHeader, IonItem, IonItemDivider, IonLabel, IonList, IonListHeader, IonModal, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButton, IonButtons, IonCheckbox, IonContent, IonHeader, IonIcon, IonItem, IonItemDivider, IonItemOption, IonItemOptions, IonItemSliding, IonLabel, IonList, IonListHeader, IonModal, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import { useContext, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { TasksContext } from '../data/TasksContext';
 import { TaskContextType } from '../types/taskType';
+import { trash } from 'ionicons/icons';
 
 const TaskList: React.FC = () => {
 
@@ -60,14 +61,23 @@ const TaskList: React.FC = () => {
                       <div>
                         {t.completed == false && 
                           <>
-                          <IonItem>
-                            <IonLabel>
-                              {t.title}<br></br>
-                              <Link to={`/edittask/${t._id}`}>Edit</Link>
-                            </IonLabel>
-                            <button onClick={handleDelete.bind(this, t._id)}>Delete Task</button>
-                            <IonCheckbox slot="end" checked={t.completed} ></IonCheckbox>
-                          </IonItem>
+                          <IonItemSliding>
+
+                            <IonItem>
+                              <IonLabel>
+                                {t.title}<br></br>
+                                <Link to={`/edittask/${t._id}`}>Edit</Link>
+                              </IonLabel>
+                              <IonCheckbox slot="end" checked={t.completed} ></IonCheckbox>
+                            </IonItem>
+
+                            <IonItemOptions side="end">
+                              <IonItemOption color="danger">
+                                <IonIcon slot="icon-only" icon={trash} onClick={handleDelete.bind(this, t._id)} />
+                              </IonItemOption>
+                            </IonItemOptions>
+
+                          </IonItemSliding>
                           </>}
                       </div>
                       )
