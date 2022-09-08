@@ -93,10 +93,20 @@ const TaskList: React.FC = () => {
                       <div>
                         {t.completed && 
                           <>
+                          <IonItemSliding>
+
                           <IonItem>
                             <IonLabel>{t.title}</IonLabel>
                             <IonCheckbox slot="end" checked={t.completed}></IonCheckbox>
                           </IonItem>
+
+                          <IonItemOptions side="end">
+                              <IonItemOption color="danger">
+                                <IonIcon slot="icon-only" icon={trash} onClick={handleDelete.bind(this, t._id)} />
+                              </IonItemOption>
+                            </IonItemOptions>
+
+                          </IonItemSliding>
                           </>}
                       </div>
                       )
