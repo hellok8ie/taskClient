@@ -19,12 +19,6 @@ export const TasksProvider = (props:any) => {
         return axios.get(baseUrl).then(response => setTasks(response.data));
     }
 
-    function getTaskById(id:ITask) {
-        return axios.get(baseUrl + id).then(response => {
-            return new Promise(resolve => resolve(response.data));
-        });
-    };
-
     function addTask(task:ITask) {
         return axios.post(baseUrl, task).then(response => {
             getTasks();

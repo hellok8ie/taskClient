@@ -2,16 +2,15 @@ import { IonButton, IonButtons, IonCheckbox, IonContent, IonHeader, IonIcon, Ion
 import { useContext, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { TasksContext } from '../data/TasksContext';
-import { TaskContextType } from '../types/taskType';
+import { ITask, TaskContextType } from '../types/taskType';
 import { trash, pencil } from 'ionicons/icons';
 import { useHistory } from 'react-router-dom';
 
 const TaskList: React.FC = () => {
 
   //FUNCTIONS/VARIABLES FOR TASKLIST
-  const { tasks, addTask, deleteTask } = useContext(TasksContext) as TaskContextType;
+  const { tasks, addTask, editTask, deleteTask } = useContext(TasksContext) as TaskContextType;
   const history = useHistory();
-
 
   function handleDelete(id:any) {
       deleteTask(id)
@@ -19,6 +18,15 @@ const TaskList: React.FC = () => {
 
   function handleEditNav(id:any) {
     history.push(`/edittask/${id}`)
+  }
+
+  function handleCheckboxChange(task:ITask) {
+    if (task.completed === true) {
+      task.completed = false
+    } else {
+      task.completed = true
+    }
+    editTask(task)
   }
 
   // FUNCTIONS/VARIABLES FOR MODAL DIALOG
@@ -65,17 +73,17 @@ const TaskList: React.FC = () => {
                 {
                     tasks.map((t) => {
                       return (
-                      <div>
-                        {t.completed == false && 
+                      <div key={t._id}>
+                        {t.completed === false && 
                           <>
                           <IonItemSliding>
 
-                            <IonItem>
+                            <IonItem key={t._id}>
                               <IonLabel>
                                 {t.title}<br></br>
                                 {/* <Link to={`/edittask/${t._id}`}>Edit</Link> */}
                               </IonLabel>
-                              <IonCheckbox slot="end" checked={t.completed}></IonCheckbox>
+                              <IonCheckbox slot="end" onClick={handleCheckboxChange.bind(this, t)} checked={t.completed}></IonCheckbox>
                             </IonItem>
                             
                             <IonItemOptions side="end">
@@ -107,7 +115,7 @@ const TaskList: React.FC = () => {
 
                           <IonItem>
                             <IonLabel>{t.title}</IonLabel>
-                            <IonCheckbox slot="end" checked={t.completed}></IonCheckbox>
+                            <IonCheckbox slot="end" checked={t.completed} onClick={handleCheckboxChange.bind(this, t)}></IonCheckbox>
                           </IonItem>
 
                           <IonItemOptions side="end">
