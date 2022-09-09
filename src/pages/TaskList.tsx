@@ -12,6 +12,7 @@ const TaskList: React.FC = () => {
 
   const { tasks, addTask, editTask, deleteTask } = useContext(TasksContext) as TaskContextType;
   const history = useHistory();
+  const ionListRef = useRef<HTMLIonListElement>(null);
 
   function handleDelete(id:any) {
       deleteTask(id)
@@ -19,6 +20,7 @@ const TaskList: React.FC = () => {
 
   function handleEditNav(id:any) {
     history.push(`/edittask/${id}`)
+    ionListRef.current?.closeSlidingItems();
   }
 
   function handleCheckboxChange(task:ITask) {
@@ -66,7 +68,7 @@ const TaskList: React.FC = () => {
 
 
       <IonContent fullscreen>
-        <IonList>
+        <IonList ref={ionListRef}>
           <IonListHeader>
             <IonLabel color='warning'>Incomplete</IonLabel>
           </IonListHeader>
@@ -133,12 +135,10 @@ const TaskList: React.FC = () => {
                   }
           
         </IonList>
-
+        <br/>
         <IonButton expand='block' color="tertiary" id='open-modal'>Add Task</IonButton>
 
       {/* CODE FOR MODAL DIALOG COMPONENT~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/}
-
-      
 
       <IonModal ref={modal} trigger="open-modal" className='ion-padding'>
 
