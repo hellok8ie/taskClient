@@ -1,4 +1,4 @@
-import { IonBackButton, IonButton, IonButtons, IonContent, IonHeader, IonItemDivider, IonLabel, IonPage, IonTitle, IonToolbar } from "@ionic/react"
+import { IonBackButton, IonButton, IonButtons, IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from "@ionic/react"
 import { useContext, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import { TasksContext } from "../data/TasksContext";
@@ -33,7 +33,7 @@ const EditTask: React.FC = () => {
     return (
         <IonPage>
             <IonContent>
-            <form onSubmit={handleSubmit}>
+            <form>
             <IonHeader>
                 <IonToolbar color='tertiary'>
                     <IonButtons slot="start">
@@ -44,12 +44,12 @@ const EditTask: React.FC = () => {
             </IonHeader>
                 <br/>
                 <br/>
-                <label>Type task below:</label>
+                <label>Update task below:</label>
                 <br/>
                 <input type="text" name="title" value={editedTask.title} onChange={handleChange} />
                 <br/>
                 <br/>
-                <button color='tertiary'>Edit Task</button>
+                <IonButton color='tertiary' onClick={handleSubmit}>Edit Task</IonButton>
             </form>
             </IonContent>
         </IonPage>
